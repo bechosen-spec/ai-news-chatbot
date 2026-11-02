@@ -1,0 +1,24 @@
+{
+  "model_id": "bbc-tfidf-svm-v1",
+  "model_version": "1.0.0",
+  "algorithm": "LinearSVC",
+  "training_dataset": "SetFit/bbc-news@9c31f7087a8c225be8b4c420d70216ef1f121eb0",
+  "supported_categories": [
+    "business",
+    "entertainment",
+    "politics",
+    "sport",
+    "tech"
+  ],
+  "random_seed": 42,
+  "trained_at_utc": "2026-11-02T17:58:28.204150+00:00",
+  "selected_by": "highest validation macro F1; test metrics used only for final reporting",
+  "test_metrics": {
+    "accuracy": 0.9808917197452229,
+    "macro_f1": 0.9800347001816263,
+    "weighted_f1": 0.9809870639956265
+  },
+  "artifact_sha256": "e357c49e4c5b018e7e473c13de60a21103485c13e724cdb09a05adcce815a19b",
+  "artifact_bytes": 972734,
+  "score_semantics": "decision_function"
+}

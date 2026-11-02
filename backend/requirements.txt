@@ -1,0 +1,11 @@
+alembic==1.17.1
+fastapi==0.120.4
+httpx==0.28.1
+joblib==1.5.2
+numpy==2.3.4
+pydantic-settings==2.11.0
+psycopg[binary]==3.2.12
+scikit-learn==1.7.2
+SQLAlchemy==2.0.44
+uvicorn[standard]==0.38.0
+

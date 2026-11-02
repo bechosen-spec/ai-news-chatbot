@@ -1,0 +1,100 @@
+{
+  "accuracy": 0.9808917197452229,
+  "macro_precision": 0.9786278081360049,
+  "macro_recall": 0.9823636363636364,
+  "macro_f1": 0.9800347001816263,
+  "weighted_f1": 0.9809870639956265,
+  "training_seconds": 2.587802493999334,
+  "inference_seconds_total": 0.21312062899960438,
+  "inference_milliseconds_per_article": 0.6787281178331349,
+  "test_articles": 314,
+  "classification_report": {
+    "business": {
+      "precision": 1.0,
+      "recall": 0.9466666666666667,
+      "f1-score": 0.9726027397260274,
+      "support": 75.0
+    },
+    "entertainment": {
+      "precision": 1.0,
+      "recall": 0.9818181818181818,
+      "f1-score": 0.9908256880733946,
+      "support": 55.0
+    },
+    "politics": {
+      "precision": 0.9672131147540983,
+      "recall": 0.9833333333333333,
+      "f1-score": 0.9752066115702479,
+      "support": 60.0
+    },
+    "sport": {
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1-score": 1.0,
+      "support": 74.0
+    },
+    "tech": {
+      "precision": 0.9259259259259259,
+      "recall": 1.0,
+      "f1-score": 0.9615384615384616,
+      "support": 50.0
+    },
+    "accuracy": 0.9808917197452229,
+    "macro avg": {
+      "precision": 0.9786278081360049,
+      "recall": 0.9823636363636364,
+      "f1-score": 0.9800347001816263,
+      "support": 314.0
+    },
+    "weighted avg": {
+      "precision": 0.98193975535523,
+      "recall": 0.9808917197452229,
+      "f1-score": 0.9809870639956265,
+      "support": 314.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      71,
+      0,
+      2,
+      0,
+      2
+    ],
+    [
+      0,
+      54,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      59,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      74,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      50
+    ]
+  ],
+  "algorithm": "LinearSVC",
+  "parameters": {
+    "C": 0.5
+  },
+  "validation_macro_f1": 0.9929483164114036,
+  "artifact_bytes": 972734,
+  "artifact_megabytes": 0.9276714324951172
+}

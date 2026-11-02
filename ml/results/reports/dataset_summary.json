@@ -1,0 +1,120 @@
+{
+  "dataset": "SetFit/bbc-news",
+  "source_provenance": {
+    "dataset": "SetFit/bbc-news",
+    "original_dataset": "BBC News Topic Dataset",
+    "source_url": "https://huggingface.co/datasets/SetFit/bbc-news",
+    "revision": "9c31f7087a8c225be8b4c420d70216ef1f121eb0",
+    "retrieved_at_utc": "2026-11-02T17:53:16.565481+00:00",
+    "language": "English",
+    "license": "No open license stated; BBC retains copyright in article content.",
+    "usage_note": "Raw text is excluded from Git and used only as a local research baseline.",
+    "files": [
+      {
+        "file": "train.jsonl",
+        "url": "https://huggingface.co/datasets/SetFit/bbc-news/resolve/9c31f7087a8c225be8b4c420d70216ef1f121eb0/train.jsonl",
+        "rows": 1225,
+        "columns": [
+          "label",
+          "label_text",
+          "text"
+        ],
+        "sha256": "67c7468203c352fdd867cfd65a56358884b07d0bf48245e4134a6606fe43c0eb",
+        "bytes": 2869756
+      },
+      {
+        "file": "test.jsonl",
+        "url": "https://huggingface.co/datasets/SetFit/bbc-news/resolve/9c31f7087a8c225be8b4c420d70216ef1f121eb0/test.jsonl",
+        "rows": 1000,
+        "columns": [
+          "label",
+          "label_text",
+          "text"
+        ],
+        "sha256": "8d8c05767052607390c92a219f4c90bc571a4b005472b0aaa5bcafcd5cc08bed",
+        "bytes": 2284560
+      }
+    ],
+    "total_rows": 2225
+  },
+  "random_seed": 42,
+  "split_strategy": "stratified 70/15/15 after global exact and conservative near-deduplication",
+  "source_missing_values": {
+    "text": 0,
+    "source_label_id": 0,
+    "label": 0,
+    "source_split": 0
+  },
+  "input_rows": 2225,
+  "usable_rows": 2090,
+  "missing_text_before_normalization": 0,
+  "empty_rows_removed": 0,
+  "exact_duplicates_removed": 101,
+  "near_duplicates_removed": 34,
+  "near_duplicate_method": "64-bit trigram SimHash, Hamming distance <= 3",
+  "class_distribution": {
+    "business": 501,
+    "entertainment": 366,
+    "politics": 397,
+    "sport": 493,
+    "tech": 333
+  },
+  "article_length_words": {
+    "min": 90,
+    "median": 334.5,
+    "mean": 389.39712918660285,
+    "p95": 741.0999999999999,
+    "max": 4492
+  },
+  "split_counts": {
+    "train": 1463,
+    "validation": 313,
+    "test": 314
+  },
+  "split_class_distribution": {
+    "train": {
+      "business": 351,
+      "entertainment": 256,
+      "politics": 278,
+      "sport": 345,
+      "tech": 233
+    },
+    "validation": {
+      "business": 75,
+      "entertainment": 55,
+      "politics": 59,
+      "sport": 74,
+      "tech": 50
+    },
+    "test": {
+      "business": 75,
+      "entertainment": 55,
+      "politics": 60,
+      "sport": 74,
+      "tech": 50
+    }
+  },
+  "representative_examples": [
+    {
+      "article_id": "da7241c71e81179d",
+      "label": "business"
+    },
+    {
+      "article_id": "1a0701388a0a06cd",
+      "label": "entertainment"
+    },
+    {
+      "article_id": "b84e5f08f6a1fe9c",
+      "label": "politics"
+    },
+    {
+      "article_id": "74d6a84741232c6e",
+      "label": "sport"
+    },
+    {
+      "article_id": "251240948f37e4bb",
+      "label": "tech"
+    }
+  ],
+  "content_hash": "1644153074c92a0a183c65fbe6cb9733bd1bfc0723d43be0790107035ae569e2"
+}
