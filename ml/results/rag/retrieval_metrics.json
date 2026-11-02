@@ -12,14 +12,14 @@
     "precision_at_3": 0.3333333333333333,
     "recall_at_3": 1.0,
     "mrr": 1.0,
-    "mean_latency_ms": 5.523205874396808,
+    "mean_latency_ms": 6.0331022505124565,
     "query_count": 8
   },
   "bm25_v1": {
     "precision_at_3": 0.3333333333333333,
     "recall_at_3": 1.0,
     "mrr": 1.0,
-    "mean_latency_ms": 3.4074050004164746,
+    "mean_latency_ms": 4.163429750860814,
     "query_count": 8
   },
   "citation_validation": {
@@ -31,7 +31,7 @@
   },
   "live_llm_evaluation": {
     "performed": false,
-    "reason": "OPENAI_API_KEY was not configured; no paid or network-dependent evaluation was run."
+    "reason": "LLM_API_KEY was not configured; no paid or network-dependent evaluation was run."
   },
   "limitations": [
     "The lawful fixture contains publisher-provided titles and URLs, not article bodies.",

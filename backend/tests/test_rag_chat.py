@@ -79,6 +79,16 @@ def test_chat_is_grounded_persistent_and_owner_isolated(client):
         == 404
     )
     assert "UNTRUSTED DATA" in provider.prompts[0][0]
+    assert (
+        client.delete(
+            f"/api/v1/chat/conversations/{conversation_id}", headers=_headers()
+        ).status_code
+        == 204
+    )
+    assert (
+        client.get(f"/api/v1/chat/conversations/{conversation_id}", headers=_headers()).status_code
+        == 404
+    )
 
 
 def test_prompt_injection_in_evidence_stays_inside_untrusted_boundary(client):

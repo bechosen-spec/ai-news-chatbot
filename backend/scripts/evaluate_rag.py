@@ -140,8 +140,7 @@ def main() -> None:
         "live_llm_evaluation": {
             "performed": False,
             "reason": (
-                "OPENAI_API_KEY was not configured; no paid or network-dependent "
-                "evaluation was run."
+                "LLM_API_KEY was not configured; no paid or network-dependent evaluation was run."
             ),
         },
         "limitations": [
@@ -153,7 +152,7 @@ def main() -> None:
     (OUTPUT / "retrieval_metrics.json").write_text(json.dumps(report, indent=2) + "\n")
     with (OUTPUT / "retrieval_queries.csv").open("w", newline="") as handle:
         fields = ["method", *keyword_rows[0].keys()]
-        writer = csv.DictWriter(handle, fieldnames=fields)
+        writer = csv.DictWriter(handle, fieldnames=fields, lineterminator="\n")
         writer.writeheader()
         for method, rows in (("keyword", keyword_rows), ("bm25_v1", bm25_rows)):
             for row in rows:

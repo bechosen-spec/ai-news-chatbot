@@ -62,6 +62,7 @@ class OpenAIResponsesProvider:
                 {"role": "user", "content": user_prompt},
             ],
             "max_output_tokens": self.settings.llm_max_output_tokens,
+            "store": False,
             "text": {
                 "format": {
                     "type": "json_schema",

@@ -1,7 +1,7 @@
 [project]
 name = "ai-news-chatbot"
-version = "0.1.0"
-description = "Phase 1 ML and API foundation for an AI news chatbot"
+version = "0.2.1"
+description = "Grounded retrieval-augmented Nigerian news chatbot API"
 requires-python = ">=3.11,<3.14"
 
 [tool.pytest.ini_options]

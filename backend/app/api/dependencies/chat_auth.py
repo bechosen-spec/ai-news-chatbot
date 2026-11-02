@@ -41,10 +41,10 @@ async def require_chat_principal(request: Request) -> ChatPrincipal:
             detail="Chat authentication is not configured",
         )
     supplied = credentials.credentials if credentials else ""
-    matched_subject = next(
-        (subject for token, subject in subjects.items() if hmac.compare_digest(supplied, token)),
-        None,
-    )
+    matched_subject = None
+    for token, subject in subjects.items():
+        if hmac.compare_digest(supplied, token):
+            matched_subject = subject
     if matched_subject is None:
         raise HTTPException(
             status.HTTP_401_UNAUTHORIZED,

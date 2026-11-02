@@ -206,8 +206,7 @@ class Retriever:
         unique_sources = len({item.source_slug or item.publisher for item in evidence})
         ratio = unique_sources / len(evidence) if evidence else 0.0
         limitations: list[str] = []
-        available_sources = len({article.source_id for article in candidates})
-        if available_sources < 2:
+        if evidence and unique_sources < 2:
             limitations.append(
                 "Only one publisher is available in the matched corpus; "
                 "cross-source corroboration is not possible."

@@ -21,6 +21,8 @@ def upgrade() -> None:
         batch.create_index("ix_chat_conversations_owner_subject", ["owner_subject"])
         batch.create_index("ix_chat_conversations_deleted_at", ["deleted_at"])
     op.execute("UPDATE chat_conversations SET updated_at = created_at WHERE updated_at IS NULL")
+    with op.batch_alter_table("chat_conversations") as batch:
+        batch.alter_column("updated_at", existing_type=sa.DateTime(timezone=True), nullable=False)
     with op.batch_alter_table("chat_messages") as batch:
         batch.add_column(sa.Column("citations", sa.JSON()))
         batch.add_column(sa.Column("message_metadata", sa.JSON()))

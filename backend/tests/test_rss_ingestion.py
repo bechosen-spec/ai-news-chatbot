@@ -71,8 +71,14 @@ def test_one_failed_feed_does_not_stop_other_feeds():
 
 
 class FakeAdapter:
-    source_name = "Punch Newspapers"
-    descriptor = TEST_DESCRIPTOR
+    descriptor = NewsSourceDescriptor(
+        slug="fixture-news",
+        name="Fixture News",
+        base_url="https://fixture.test",
+        feed_url="https://fixture.test/feed",
+        terms_url="https://fixture.test/terms",
+    )
+    source_name = descriptor.name
     failures = []
 
     def fetch(self, *, limit=None):
@@ -82,7 +88,7 @@ class FakeAdapter:
                 title="National Assembly debates a budget",
                 content="Lawmakers and the minister discussed the proposed bill.",
                 source_name=self.source_name,
-                original_url="https://punchng.com/example",
+                original_url="https://fixture.test/example",
                 category="politics",
                 published_at=datetime(2026, 11, 2, tzinfo=UTC),
             )
@@ -118,6 +124,8 @@ def test_ingestion_persists_classification_and_is_incremental():
         assert article.content == ""
         assert article.excerpt.startswith("Lawmakers")
         assert article.source_category == "politics"
+        assert article.source.slug == "fixture-news"
+        assert article.source.base_url == "https://fixture.test"
         prediction = session.scalar(select(ClassificationPrediction))
         assert prediction.model_version == "1.0"
         assert prediction.score_type == "decision_function"
