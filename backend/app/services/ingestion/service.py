@@ -17,8 +17,9 @@ from backend.app.db.models import (
     IngestionRun,
     NewsArticle,
 )
-from backend.app.services.ingestion.rss import RSSFeedAdapter
 from backend.app.services.model_service import ModelService, ModelUnavailableError
+from backend.app.services.retrieval.index import index_article
+from shared.news import NewsSourceAdapter
 
 LOGGER = logging.getLogger(__name__)
 SUPPORTED_CATEGORIES = ("business", "entertainment", "politics", "sport", "tech")
@@ -35,16 +36,17 @@ def _ensure_categories(session: Session) -> dict[str, ArticleCategory]:
     return existing
 
 
-def _ensure_source(session: Session, adapter: RSSFeedAdapter) -> DataSource:
-    source = session.scalar(select(DataSource).where(DataSource.slug == "punch"))
+def _ensure_source(session: Session, adapter: NewsSourceAdapter) -> DataSource:
+    descriptor = adapter.descriptor
+    source = session.scalar(select(DataSource).where(DataSource.slug == descriptor.slug))
     if source is None:
         source = DataSource(
-            name=adapter.source_name,
-            slug="punch",
-            base_url="https://punchng.com",
-            ingestion_method="rss",
-            feed_url="https://rss.punchng.com/",
-            terms_url="https://rss.punchng.com/",
+            name=descriptor.name,
+            slug=descriptor.slug,
+            base_url=descriptor.base_url,
+            ingestion_method=descriptor.ingestion_method,
+            feed_url=descriptor.feed_url,
+            terms_url=descriptor.terms_url,
             is_active=True,
         )
         session.add(source)
@@ -58,7 +60,7 @@ def _safe_message(error: Exception) -> str:
 
 def ingest(
     session: Session,
-    adapter: RSSFeedAdapter,
+    adapter: NewsSourceAdapter,
     model_service: ModelService,
     *,
     limit: int | None = 50,
@@ -134,6 +136,7 @@ def ingest(
             )
             session.add(article)
             session.flush()
+            index_article(session, article)
             run.inserted_count += 1
 
         for failure in adapter.failures:

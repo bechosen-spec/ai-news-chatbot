@@ -141,8 +141,13 @@ class ChatConversation(Base):
     __tablename__ = "chat_conversations"
     id: Mapped[str] = mapped_column(String(36), primary_key=True, default=new_id)
     user_id: Mapped[str | None] = mapped_column(ForeignKey("users.id"), index=True)
+    owner_subject: Mapped[str | None] = mapped_column(String(255), index=True)
     title: Mapped[str | None] = mapped_column(String(250))
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc)
+    updated_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=now_utc, onupdate=now_utc
+    )
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), index=True)
     user: Mapped[User | None] = relationship(back_populates="conversations")
     messages: Mapped[list[ChatMessage]] = relationship(
         back_populates="conversation", cascade="all, delete-orphan"
@@ -157,6 +162,9 @@ class ChatMessage(Base):
     )
     role: Mapped[str] = mapped_column(String(20))
     content: Mapped[str] = mapped_column(Text)
+    citations: Mapped[list[dict] | None] = mapped_column(JSON)
+    message_metadata: Mapped[dict | None] = mapped_column(JSON)
+    status: Mapped[str] = mapped_column(String(40), default="complete")
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), default=now_utc)
     conversation: Mapped[ChatConversation] = relationship(back_populates="messages")
 
@@ -270,4 +278,7 @@ class RetrievalMetadata(Base):
     text_hash: Mapped[str] = mapped_column(String(64), index=True)
     indexed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     index_version: Mapped[str | None] = mapped_column(String(80))
+    term_frequencies: Mapped[dict[str, int] | None] = mapped_column(JSON)
+    title_term_frequencies: Mapped[dict[str, int] | None] = mapped_column(JSON)
+    document_length: Mapped[int] = mapped_column(Integer, default=0)
     article: Mapped[NewsArticle] = relationship(back_populates="retrieval_metadata")

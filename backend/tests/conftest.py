@@ -6,6 +6,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from backend.app.core.config import Settings
+from backend.app.db.base import Base
 from backend.app.main import create_app
 from ml.src.modeling import build_pipeline
 
@@ -40,7 +41,9 @@ def client(tmp_path):
             model_metadata_path=metadata_path,
             database_url="sqlite://",
             admin_api_key="test-admin-key",
+            chat_access_tokens='{"reader-a-token":"reader-a","reader-b-token":"reader-b"}',
         )
     )
+    Base.metadata.create_all(app.state.engine)
     with TestClient(app, raise_server_exceptions=False) as test_client:
         yield test_client
