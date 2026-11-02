@@ -1,9 +1,9 @@
 # AI Prompt-Based Online News Chatbot
 
-Phase 1 provides a reproducible news-topic classification baseline and a deployment-ready FastAPI
-foundation for a future Nigerian online-news chatbot. It trains and compares TF-IDF + Linear SVM
-and TF-IDF + Random Forest on real news data, preserves measured results, exposes the selected
-pipeline through a validated API, and defines the initial relational schema.
+The repository contains the verified Phase 1 topic-classification baseline and Milestone 2A of the
+Nigerian news platform. Milestone 2A adds permitted Punch latest-news RSS ingestion, incremental persistence,
+classification of incoming metadata with the existing SVM, news browsing/search APIs, provenance,
+ingestion monitoring, and protected administrative correction and soft-deletion operations.
 
 The classifier predicts **topic only** (`business`, `entertainment`, `politics`, `sport`, `tech`).
 It does not detect misinformation, factuality, political bias, or source credibility.
@@ -24,6 +24,7 @@ frontend/     Phase 2 React/TypeScript/Vercel integration notes
 ml/           acquisition, preprocessing, training, evaluation, artifacts, measured outputs
 docs/         architecture, dataset, methodology, experiment and deployment reports
 tests/        dataset and ML unit tests
+shared/       dependency-light ingestion contracts shared by backend and research code
 ```
 
 ## Local setup
@@ -33,6 +34,27 @@ Python 3.11–3.13 is supported. Commands are run from the repository root.
 ```bash
 python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
+.venv/bin/alembic upgrade head
+.venv/bin/uvicorn backend.app.main:app --reload
+```
+
+Copy `.env.example` to `.env`. Set a long random `ADMIN_API_KEY` before using administrative
+endpoints. SQLite is the zero-service local default; set `DATABASE_URL` to a PostgreSQL Psycopg URL
+for Railway or local PostgreSQL.
+
+Run one bounded ingestion job manually—never as a permanent loop inside the web worker:
+
+```bash
+.venv/bin/python -m backend.scripts.ingest_news --source punch --limit 50
+```
+
+The same command is suitable for Railway Cron. It fetches only official RSS metadata/excerpts,
+normalizes and deduplicates canonical URLs, applies the existing SVM, and persists provenance and
+classification metadata. It does not reproduce publisher article bodies.
+
+The historical Phase 1 experiment can still be reproduced separately:
+
+```bash
 .venv/bin/python -m ml.scripts.acquire_data
 .venv/bin/python -m ml.scripts.prepare_data
 .venv/bin/python -m ml.scripts.train_models
@@ -54,6 +76,16 @@ OpenAPI documentation is available at `http://localhost:8000/docs`.
 - `GET /health` — service version and operational status.
 - `GET /api/v1/ml/model-info` — non-sensitive artifact and training metadata.
 - `POST /api/v1/ml/classify` — topic prediction from a title, content, or both.
+- `GET /api/v1/news` — paginated news with category/source filters and sorting.
+- `GET /api/v1/news/search` — bounded title/excerpt keyword search.
+- `GET /api/v1/news/categories` and `/sources` — filter metadata.
+- `GET /api/v1/news/{id}` — article provenance, excerpt, and model metadata.
+- `POST /api/v1/admin/news/ingest` — protected bounded ingestion trigger.
+- `GET /api/v1/admin/ingestion-runs` — protected run/failure history.
+- `PATCH` or `DELETE /api/v1/admin/news/{id}` — protected correction or soft deletion.
+
+Administrative calls require `X-Admin-Key`. This is a transitional server-side Milestone 2A
+control; user accounts and role-backed authentication are deliberately deferred to Milestone 2C.
 
 Linear SVM outputs are explicitly returned as uncalibrated `decision_function` scores, not
 probabilities. Requests are limited to 500 title characters and 50,000 content characters.
@@ -69,8 +101,9 @@ SQLite is the zero-service local default; production uses `DATABASE_URL` for Rai
 .venv/bin/ruff format --check .
 ```
 
-The maintained suite does not download the dataset or retrain full models. GitHub Actions runs the
-same deterministic checks. Copy `.env.example` to `.env` for local overrides; never commit secrets.
+The maintained suite uses deterministic RSS and model fixtures, does not call publishers, and does
+not retrain full models. GitHub Actions runs the same checks. Live feed verification is a separate
+documented smoke test. Never commit secrets or local databases.
 
 ## Deployment boundary
 
@@ -79,14 +112,18 @@ artifact is loaded once, hash-checked, and served by FastAPI. The future React/T
 will use `VITE_API_BASE_URL` and deploy separately to Vercel. See
 [architecture](docs/architecture.md) and [deployment plan](docs/deployment_plan.md).
 
-## Limitations and Phase 2
+## Limitations and remaining Phase 2 work
 
 - BBC News is old, British, and not representative of Nigerian reporting or current language.
 - The source repository states BBC copyright but no open dataset license; raw text is not committed.
-- No probability calibration, Nigerian external evaluation, RAG, LLM, bias mitigation, fact-checking,
-  authentication, pgvector, voice features, or production UI is claimed in Phase 1.
+- Punch is the only integrated publisher because it provides an explicit official RSS directory.
+- No Nigerian labeled evaluation set exists yet; live ingestion is not an accuracy evaluation.
+- No probability calibration, RAG, LLM, bias mitigation, fact-checking, user authentication,
+  pgvector, voice features, or production UI is claimed in Milestone 2A.
 - Near-duplicate detection is a conservative 64-bit trigram SimHash screen, not semantic deduplication.
 
 Detailed evidence is in [dataset report](docs/dataset_report.md),
 [methodology](docs/ml_methodology.md), [experiment report](docs/experiment_report.md), and
-[Phase 1 summary](docs/phase_1_summary.md).
+[Phase 1 summary](docs/phase_1_summary.md). Milestone 2A evidence is in
+[ingestion sources](docs/ingestion_sources.md), [Phase 2 architecture](docs/phase_2_architecture.md),
+and [Phase 2 evaluation](docs/phase_2_evaluation.md).
