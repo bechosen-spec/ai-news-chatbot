@@ -1,0 +1,101 @@
+{
+  "accuracy": 0.9617834394904459,
+  "macro_precision": 0.9618782019040213,
+  "macro_recall": 0.9604242424242424,
+  "macro_f1": 0.9608101334381038,
+  "weighted_f1": 0.9615994789299275,
+  "training_seconds": 3.832150198999443,
+  "inference_seconds_total": 0.26059227299992926,
+  "inference_milliseconds_per_article": 0.829911697452004,
+  "test_articles": 314,
+  "classification_report": {
+    "business": {
+      "precision": 0.96,
+      "recall": 0.96,
+      "f1-score": 0.96,
+      "support": 75.0
+    },
+    "entertainment": {
+      "precision": 0.9811320754716981,
+      "recall": 0.9454545454545454,
+      "f1-score": 0.9629629629629629,
+      "support": 55.0
+    },
+    "politics": {
+      "precision": 0.9649122807017544,
+      "recall": 0.9166666666666666,
+      "f1-score": 0.9401709401709402,
+      "support": 60.0
+    },
+    "sport": {
+      "precision": 0.961038961038961,
+      "recall": 1.0,
+      "f1-score": 0.9801324503311258,
+      "support": 74.0
+    },
+    "tech": {
+      "precision": 0.9423076923076923,
+      "recall": 0.98,
+      "f1-score": 0.9607843137254902,
+      "support": 50.0
+    },
+    "accuracy": 0.9617834394904459,
+    "macro avg": {
+      "precision": 0.9618782019040213,
+      "recall": 0.9604242424242424,
+      "f1-score": 0.9608101334381038,
+      "support": 314.0
+    },
+    "weighted avg": {
+      "precision": 0.9620677347940013,
+      "recall": 0.9617834394904459,
+      "f1-score": 0.9615994789299275,
+      "support": 314.0
+    }
+  },
+  "confusion_matrix": [
+    [
+      72,
+      0,
+      2,
+      0,
+      1
+    ],
+    [
+      2,
+      52,
+      0,
+      0,
+      1
+    ],
+    [
+      1,
+      0,
+      55,
+      3,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      74,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      49
+    ]
+  ],
+  "algorithm": "RandomForestClassifier",
+  "parameters": {
+    "n_estimators": 200,
+    "max_depth": null
+  },
+  "validation_macro_f1": 0.9581774403125095,
+  "artifact_bytes": 3985932,
+  "artifact_megabytes": 3.801280975341797
+}

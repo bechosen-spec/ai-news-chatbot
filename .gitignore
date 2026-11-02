@@ -218,3 +218,15 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+.DS_Store
+
+# Raw and processed article text is reproducible but is not committed.
+ml/data/raw/*
+!ml/data/raw/.gitkeep
+ml/data/processed/*
+!ml/data/processed/.gitkeep
+
+# Locally generated, non-selected model candidates.
+ml/artifacts/*.joblib
+!ml/artifacts/selected_model.joblib

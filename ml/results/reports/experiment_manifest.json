@@ -1,0 +1,75 @@
+{
+  "experiment_id": "phase1-20261102T175829Z",
+  "run_at_utc": "2026-11-02T17:58:29.817867+00:00",
+  "git_sha": "984183efcd716c917c07b59f4a85d692977a5a13",
+  "dataset_content_hash": "1644153074c92a0a183c65fbe6cb9733bd1bfc0723d43be0790107035ae569e2",
+  "split_counts": {
+    "train": 1463,
+    "validation": 313,
+    "test": 314
+  },
+  "random_seed": 42,
+  "searches": {
+    "svm": {
+      "selected_parameters": {
+        "C": 0.5
+      },
+      "validation_macro_f1": 0.9929483164114036,
+      "candidates": [
+        {
+          "parameters": {
+            "C": 0.5
+          },
+          "validation_macro_f1": 0.9929483164114036,
+          "fit_seconds": 2.324816533997364
+        },
+        {
+          "parameters": {
+            "C": 1.0
+          },
+          "validation_macro_f1": 0.9891728599666767,
+          "fit_seconds": 2.1507639509982255
+        },
+        {
+          "parameters": {
+            "C": 2.0
+          },
+          "validation_macro_f1": 0.9891728599666767,
+          "fit_seconds": 2.201427555999544
+        }
+      ]
+    },
+    "random_forest": {
+      "selected_parameters": {
+        "n_estimators": 200,
+        "max_depth": null
+      },
+      "validation_macro_f1": 0.9581774403125095,
+      "candidates": [
+        {
+          "parameters": {
+            "n_estimators": 200,
+            "max_depth": 40
+          },
+          "validation_macro_f1": 0.9545220001876349,
+          "fit_seconds": 3.126038332000462
+        },
+        {
+          "parameters": {
+            "n_estimators": 200,
+            "max_depth": null
+          },
+          "validation_macro_f1": 0.9581774403125095,
+          "fit_seconds": 3.0862279719985963
+        }
+      ]
+    }
+  },
+  "selected_model": "svm",
+  "environment": {
+    "python": "3.13.5",
+    "platform": "macOS-26.5.2-x86_64-i386-64bit-Mach-O",
+    "cpu_count": 12,
+    "scikit_learn": "1.7.2"
+  }
+}
