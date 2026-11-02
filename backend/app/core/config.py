@@ -4,7 +4,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Annotated
 
-from pydantic import Field, field_validator
+from pydantic import Field, SecretStr, field_validator
 from pydantic_settings import BaseSettings, NoDecode, SettingsConfigDict
 
 
@@ -12,7 +12,7 @@ class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     app_name: str = "AI News Chatbot API"
-    app_version: str = "0.1.0"
+    app_version: str = "0.2.0"
     app_env: str = "development"
     database_url: str = "sqlite:///./ai_news.db"
     model_path: Path = Path("ml/artifacts/selected_model.joblib")
@@ -21,6 +21,10 @@ class Settings(BaseSettings):
         default_factory=lambda: ["http://localhost:5173", "http://localhost:3000"]
     )
     log_level: str = "INFO"
+    admin_api_key: SecretStr | None = None
+    ingestion_timeout_seconds: float = Field(default=15.0, ge=1, le=60)
+    ingestion_retry_limit: int = Field(default=3, ge=1, le=5)
+    news_excerpt_max_characters: int = Field(default=1_500, ge=200, le=5_000)
 
     @field_validator("allowed_origins", mode="before")
     @classmethod
