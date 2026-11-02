@@ -1,0 +1,105 @@
+{
+  "provenance": {
+    "publisher": "Punch Newspapers",
+    "source_slug": "punch",
+    "feed": "https://rss.punchng.com/v1/category/latest_news",
+    "collected_at": "2026-11-02T19:15:00+00:00",
+    "scope": "Publisher-provided titles and canonical URLs only; no article bodies are reproduced."
+  },
+  "articles": [
+    {
+      "id": "punch-01",
+      "title": "US Supreme Court hears Catholic schools’ funding dispute",
+      "url": "https://punchng.com/us-supreme-court-hears-catholic-schools-funding-dispute"
+    },
+    {
+      "id": "punch-02",
+      "title": "US excludes South Africa, Rwanda from Africa duty-free trade deal",
+      "url": "https://punchng.com/us-excludes-south-africa-rwanda-from-africa-duty-free-trade-deal"
+    },
+    {
+      "id": "punch-03",
+      "title": "NYSC gets new state coordinator in Gombe",
+      "url": "https://punchng.com/nysc-gets-new-state-coordinator-in-gombe"
+    },
+    {
+      "id": "punch-04",
+      "title": "Evening recap: FG unveils USSD loans, UK migrants face 10-year wait, other top stories",
+      "url": "https://punchng.com/evening-recap-fg-unveils-ussd-loans-uk-migrants-face-10-year-wait-other-top-stories"
+    },
+    {
+      "id": "punch-05",
+      "title": "Police arrest suspected cable vandal in Gombe, recover stolen wires",
+      "url": "https://punchng.com/police-arrest-suspected-cable-vandal-in-gombe-recover-stolen-wires"
+    },
+    {
+      "id": "punch-06",
+      "title": "US approves cheap version of HIV prevention shot",
+      "url": "https://punchng.com/us-approves-cheap-version-of-hiv-prevention-shot"
+    },
+    {
+      "id": "punch-07",
+      "title": "‘Give Regina breathing space,’ Ned Nwoko tells bloggers",
+      "url": "https://punchng.com/give-regina-breathing-space-ned-nwoko-tells-bloggers"
+    },
+    {
+      "id": "punch-08",
+      "title": "Agbara Nla grosses N450m, tops box office five weekends",
+      "url": "https://punchng.com/agbara-nla-grosses-n450m-tops-box-office-five-weekends"
+    },
+    {
+      "id": "punch-09",
+      "title": "2027: Shettima rallies Cross River voters for Tinubu",
+      "url": "https://punchng.com/2027-shettima-rallies-cross-river-voters-for-tinubu"
+    },
+    {
+      "id": "punch-10",
+      "title": "Don urges FG to include private institutions in NELFUND",
+      "url": "https://punchng.com/don-urges-fg-to-include-private-institutions-in-nelfund"
+    },
+    {
+      "id": "punch-11",
+      "title": "Violence: Oyo AAC urges opposition to consider 2027 poll boycott",
+      "url": "https://punchng.com/violence-oyo-aac-urges-opposition-to-consider-2027-poll-boycott"
+    },
+    {
+      "id": "punch-12",
+      "title": "Reps seek real estate regulator to curb fraud, boost housing investment",
+      "url": "https://punchng.com/reps-seek-real-estate-regulator-to-curb-fraud-boost-housing-investment"
+    }
+  ],
+  "queries": [
+    {
+      "query": "Who is the new NYSC state coordinator in Gombe?",
+      "relevant_ids": ["punch-03"]
+    },
+    {
+      "query": "Which countries were excluded from the Africa duty-free trade deal?",
+      "relevant_ids": ["punch-02"]
+    },
+    {
+      "query": "What USSD loans were unveiled in the evening recap?",
+      "relevant_ids": ["punch-04"]
+    },
+    {
+      "query": "What did police recover after arresting a cable vandal in Gombe?",
+      "relevant_ids": ["punch-05"]
+    },
+    {
+      "query": "Which HIV prevention shot received US approval?",
+      "relevant_ids": ["punch-06"]
+    },
+    {
+      "query": "What did Ned Nwoko tell bloggers about Regina?",
+      "relevant_ids": ["punch-07"]
+    },
+    {
+      "query": "Which title topped the box office for five weekends?",
+      "relevant_ids": ["punch-08"]
+    },
+    {
+      "query": "Who rallied Cross River voters for Tinubu in 2027?",
+      "relevant_ids": ["punch-09"]
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+method,query,relevant_ids,retrieved_ids,precision_at_3,recall_at_3,reciprocal_rank,latency_ms
+keyword,Who is the new NYSC state coordinator in Gombe?,punch-03,punch-03|punch-05,0.3333333333333333,1.0,1.0,21.178484999836655
+keyword,Which countries were excluded from the Africa duty-free trade deal?,punch-02,punch-02,0.3333333333333333,1.0,1.0,3.9238040008058306
+keyword,What USSD loans were unveiled in the evening recap?,punch-04,punch-04,0.3333333333333333,1.0,1.0,3.049350001674611
+keyword,What did police recover after arresting a cable vandal in Gombe?,punch-05,punch-05|punch-03,0.3333333333333333,1.0,1.0,3.911846000846708
+keyword,Which HIV prevention shot received US approval?,punch-06,punch-06|punch-02|punch-01,0.3333333333333333,1.0,1.0,3.666565000457922
+keyword,What did Ned Nwoko tell bloggers about Regina?,punch-07,punch-07,0.3333333333333333,1.0,1.0,3.1490889996348415
+keyword,Which title topped the box office for five weekends?,punch-08,punch-08,0.3333333333333333,1.0,1.0,4.605177000485128
+keyword,Who rallied Cross River voters for Tinubu in 2027?,punch-09,punch-09|punch-11,0.3333333333333333,1.0,1.0,4.780502000357956
+bm25_v1,Who is the new NYSC state coordinator in Gombe?,punch-03,punch-03|punch-05,0.3333333333333333,1.0,1.0,5.166751998331165
+bm25_v1,Which countries were excluded from the Africa duty-free trade deal?,punch-02,punch-02,0.3333333333333333,1.0,1.0,4.3954320026386995
+bm25_v1,What USSD loans were unveiled in the evening recap?,punch-04,punch-04,0.3333333333333333,1.0,1.0,3.8756850008212496
+bm25_v1,What did police recover after arresting a cable vandal in Gombe?,punch-05,punch-05|punch-03,0.3333333333333333,1.0,1.0,4.681540001911344
+bm25_v1,Which HIV prevention shot received US approval?,punch-06,punch-06|punch-01|punch-02,0.3333333333333333,1.0,1.0,4.16118499924778
+bm25_v1,What did Ned Nwoko tell bloggers about Regina?,punch-07,punch-07,0.3333333333333333,1.0,1.0,4.797863999556284
+bm25_v1,Which title topped the box office for five weekends?,punch-08,punch-08,0.3333333333333333,1.0,1.0,3.1720010010758415
+bm25_v1,Who rallied Cross River voters for Tinubu in 2027?,punch-09,punch-09|punch-11,0.3333333333333333,1.0,1.0,3.05697900330415

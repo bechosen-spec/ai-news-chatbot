@@ -9,6 +9,15 @@ from backend.app.db.models import ClassificationPrediction, IngestionFailure, Ne
 from backend.app.services.ingestion.rss import RSSFeedAdapter
 from backend.app.services.ingestion.service import ingest
 from shared.news import NewsArticle as IncomingArticle
+from shared.news import NewsSourceDescriptor
+
+TEST_DESCRIPTOR = NewsSourceDescriptor(
+    slug="punch",
+    name="Punch Newspapers",
+    base_url="https://punchng.com",
+    feed_url="https://rss.punchng.com/",
+    terms_url="https://rss.punchng.com/",
+)
 
 RSS = b"""<?xml version="1.0"?>
 <rss xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0"><channel>
@@ -26,7 +35,7 @@ def test_rss_parser_preserves_provenance_and_removes_tracking():
         transport=httpx.MockTransport(lambda request: httpx.Response(200, content=RSS))
     )
     adapter = RSSFeedAdapter(
-        source_name="Punch Newspapers",
+        descriptor=TEST_DESCRIPTOR,
         allowed_domains={"punchng.com"},
         feeds={"politics": "https://rss.punchng.com/v1/category/politics"},
         client=client,
@@ -47,7 +56,7 @@ def test_one_failed_feed_does_not_stop_other_feeds():
         return httpx.Response(200, content=RSS)
 
     adapter = RSSFeedAdapter(
-        source_name="Punch Newspapers",
+        descriptor=TEST_DESCRIPTOR,
         allowed_domains={"punchng.com"},
         feeds={
             "failed": "https://rss.punchng.com/failed",
@@ -62,7 +71,14 @@ def test_one_failed_feed_does_not_stop_other_feeds():
 
 
 class FakeAdapter:
-    source_name = "Punch Newspapers"
+    descriptor = NewsSourceDescriptor(
+        slug="fixture-news",
+        name="Fixture News",
+        base_url="https://fixture.test",
+        feed_url="https://fixture.test/feed",
+        terms_url="https://fixture.test/terms",
+    )
+    source_name = descriptor.name
     failures = []
 
     def fetch(self, *, limit=None):
@@ -72,7 +88,7 @@ class FakeAdapter:
                 title="National Assembly debates a budget",
                 content="Lawmakers and the minister discussed the proposed bill.",
                 source_name=self.source_name,
-                original_url="https://punchng.com/example",
+                original_url="https://fixture.test/example",
                 category="politics",
                 published_at=datetime(2026, 11, 2, tzinfo=UTC),
             )
@@ -108,6 +124,8 @@ def test_ingestion_persists_classification_and_is_incremental():
         assert article.content == ""
         assert article.excerpt.startswith("Lawmakers")
         assert article.source_category == "politics"
+        assert article.source.slug == "fixture-news"
+        assert article.source.base_url == "https://fixture.test"
         prediction = session.scalar(select(ClassificationPrediction))
         assert prediction.model_version == "1.0"
         assert prediction.score_type == "decision_function"

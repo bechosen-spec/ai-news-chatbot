@@ -9,6 +9,16 @@ from datetime import datetime
 
 
 @dataclass(frozen=True)
+class NewsSourceDescriptor:
+    slug: str
+    name: str
+    base_url: str
+    feed_url: str | None
+    terms_url: str | None
+    ingestion_method: str = "rss"
+
+
+@dataclass(frozen=True)
 class NewsArticle:
     external_id: str
     title: str
@@ -29,6 +39,8 @@ class NewsArticle:
 
 class NewsSourceAdapter(ABC):
     """Implemented only for sources with verified, permitted APIs or feeds."""
+
+    descriptor: NewsSourceDescriptor
 
     @abstractmethod
     def fetch(self, *, limit: int | None = None) -> Iterable[NewsArticle]:

@@ -1,0 +1,41 @@
+{
+  "fixture": "ml/data/evaluation/phase2b_punch_metadata.json",
+  "provenance": {
+    "publisher": "Punch Newspapers",
+    "source_slug": "punch",
+    "feed": "https://rss.punchng.com/v1/category/latest_news",
+    "collected_at": "2026-11-02T19:15:00+00:00",
+    "scope": "Publisher-provided titles and canonical URLs only; no article bodies are reproduced."
+  },
+  "corpus_size": 12,
+  "keyword_baseline": {
+    "precision_at_3": 0.3333333333333333,
+    "recall_at_3": 1.0,
+    "mrr": 1.0,
+    "mean_latency_ms": 6.0331022505124565,
+    "query_count": 8
+  },
+  "bm25_v1": {
+    "precision_at_3": 0.3333333333333333,
+    "recall_at_3": 1.0,
+    "mrr": 1.0,
+    "mean_latency_ms": 4.163429750860814,
+    "query_count": 8
+  },
+  "citation_validation": {
+    "case_count": 3,
+    "correct": 3,
+    "accuracy": 1,
+    "fabricated_citation_rejected": true,
+    "missing_citation_rejected": true
+  },
+  "live_llm_evaluation": {
+    "performed": false,
+    "reason": "LLM_API_KEY was not configured; no paid or network-dependent evaluation was run."
+  },
+  "limitations": [
+    "The lawful fixture contains publisher-provided titles and URLs, not article bodies.",
+    "All items are from one publisher, so cross-source diversity cannot be evaluated.",
+    "Eight relevance judgments are manually reviewed but small and domain-specific."
+  ]
+}

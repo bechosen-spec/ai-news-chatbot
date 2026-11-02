@@ -17,7 +17,7 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 import httpx
 from defusedxml import ElementTree
 
-from shared.news import NewsArticle, NewsSourceAdapter
+from shared.news import NewsArticle, NewsSourceAdapter, NewsSourceDescriptor
 
 LOGGER = logging.getLogger(__name__)
 TRACKING_PARAMETERS = {"utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content"}
@@ -77,7 +77,7 @@ class RSSFeedAdapter(NewsSourceAdapter):
     def __init__(
         self,
         *,
-        source_name: str,
+        descriptor: NewsSourceDescriptor,
         allowed_domains: set[str],
         feeds: dict[str, str],
         timeout_seconds: float = 15,
@@ -85,7 +85,8 @@ class RSSFeedAdapter(NewsSourceAdapter):
         excerpt_max_characters: int = 1_500,
         client: httpx.Client | None = None,
     ) -> None:
-        self.source_name = source_name
+        self.descriptor = descriptor
+        self.source_name = descriptor.name
         self.allowed_domains = allowed_domains
         self.feeds = feeds
         self.timeout_seconds = timeout_seconds
@@ -194,7 +195,13 @@ PUNCH_FEEDS = {
 
 def punch_adapter(**options) -> RSSFeedAdapter:
     return RSSFeedAdapter(
-        source_name="Punch Newspapers",
+        descriptor=NewsSourceDescriptor(
+            slug="punch",
+            name="Punch Newspapers",
+            base_url="https://punchng.com",
+            feed_url="https://rss.punchng.com/",
+            terms_url="https://rss.punchng.com/",
+        ),
         allowed_domains={"punchng.com", "www.punchng.com"},
         feeds=PUNCH_FEEDS,
         **options,
