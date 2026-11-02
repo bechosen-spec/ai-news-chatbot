@@ -220,6 +220,7 @@ __marimo__/
 .streamlit/secrets.toml
 
 .DS_Store
+ai_news.db
 
 # Raw and processed article text is reproducible but is not committed.
 ml/data/raw/*

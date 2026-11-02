@@ -4,42 +4,12 @@ from __future__ import annotations
 
 import hashlib
 import re
-from abc import ABC, abstractmethod
-from collections.abc import Iterable
-from dataclasses import asdict, dataclass
-from datetime import datetime
 
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
 BBC_CATEGORIES = ("business", "entertainment", "politics", "sport", "tech")
 RANDOM_SEED = 42
-
-
-@dataclass(frozen=True)
-class NewsArticle:
-    """Source-neutral article shape for later Nigerian feed/API ingestion."""
-
-    external_id: str
-    title: str
-    content: str
-    source_name: str
-    original_url: str
-    published_at: datetime | None = None
-    collected_at: datetime | None = None
-    language: str = "en"
-    category: str | None = None
-
-    def to_dict(self) -> dict[str, object]:
-        return asdict(self)
-
-
-class NewsSourceAdapter(ABC):
-    """Interface implemented only for sources with permitted APIs or feeds."""
-
-    @abstractmethod
-    def fetch(self, *, limit: int | None = None) -> Iterable[NewsArticle]:
-        """Yield normalized articles while retaining provenance."""
 
 
 def normalize_text(value: object) -> str:

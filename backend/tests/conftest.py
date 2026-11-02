@@ -35,7 +35,12 @@ def client(tmp_path):
     }
     metadata_path.write_text(json.dumps(metadata))
     app = create_app(
-        Settings(model_path=model_path, model_metadata_path=metadata_path, database_url="sqlite://")
+        Settings(
+            model_path=model_path,
+            model_metadata_path=metadata_path,
+            database_url="sqlite://",
+            admin_api_key="test-admin-key",
+        )
     )
     with TestClient(app, raise_server_exceptions=False) as test_client:
         yield test_client
