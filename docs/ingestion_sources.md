@@ -36,4 +36,3 @@ terms review, domain allow-listing, fixture coverage, and a live bounded smoke t
 RSS availability is not permission to republish full articles. The application stores only feed
 metadata and bounded excerpts, names Punch on every response, preserves the original URL, and includes
 a full-article-at-source notice. No paywall, robots control, or anti-bot mechanism is bypassed.
-

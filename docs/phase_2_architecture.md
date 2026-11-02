@@ -47,4 +47,3 @@ mutations produce audit records. Full user registration, password hashing, sessi
 authorization belong to Milestone 2C and are not claimed here.
 
 Milestone 2B will add retrieval and grounded chat only after this PR is reviewed and merged.
-

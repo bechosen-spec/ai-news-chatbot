@@ -34,9 +34,17 @@ These observations are pipeline outputs, not accuracy results: the sample has no
 truth, is tiny and time-dependent, and the classifier was trained on historical British news. No
 Nigerian accuracy, calibration, or bias claim is made.
 
+## Container build
+
+Docker accepted the Railway Dockerfile, Python 3.13 base image, and repository build context. Two
+dependency-install attempts were blocked by DNS failures resolving `files.pythonhosted.org`; the
+second attempt failed while retrieving Alembic metadata. The same pinned requirements are installed
+and tested in the local virtual environment, but a completed container image is not claimed from this
+run. The Dockerfile includes the backend, Alembic configuration and migrations, trusted model
+artifact, and shared contracts for the next build in a network-capable CI/deployment environment.
+
 ## Not evaluated in Milestone 2A
 
 PostgreSQL production load, Railway Cron, Nigerian classification accuracy, temporal robustness,
 semantic retrieval, LLM grounding, citation validation, user authentication, frontend behavior, and
 voice functionality remain unverified and belong to later reviewed milestones.
-

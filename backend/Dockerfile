@@ -5,6 +5,7 @@ WORKDIR /app
 COPY backend/requirements.txt /app/backend/requirements.txt
 RUN pip install --no-cache-dir -r /app/backend/requirements.txt
 COPY backend /app/backend
+COPY alembic.ini /app/alembic.ini
 COPY ml/artifacts /app/ml/artifacts
 COPY shared /app/shared
 EXPOSE 8000

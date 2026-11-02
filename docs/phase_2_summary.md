@@ -20,11 +20,12 @@
 Only Punch is integrated. No full publisher article bodies are stored. The transitional admin API
 key is not the later user/role authentication system. Search is transparent SQL keyword matching,
 not semantic retrieval. No trending score is exposed because no defensible engagement signal exists.
-The live sample is not a labeled Nigerian evaluation set.
+The live sample is not a labeled Nigerian evaluation set. Local Docker build completion was blocked
+by external package-index DNS resolution after two attempts; application dependencies and behavior
+were verified in the project virtual environment instead.
 
 ## Review boundary
 
 Milestone 2A ends with its own PR. Milestone 2B—retrieval, LLM integration, grounded answers,
 citations, conversational memory, and diversity-aware evidence ranking—must not begin until this PR
 is reviewed and merged.
-
